@@ -9,7 +9,7 @@ currency = input("Convert to(Currency): ").upper()
 quantity = float(input("what is the value of {} you would like to convert: ".format(base)))
 #URL creation for the users specific parameters
 url = base_url + "/" + date + "?access_key=" + access_key + "&base=" + base + "&symbols" + currency
-response = requests.GET(url)
+response = requests.get(url)
 #If the format for the below is incorrect, this will print the error message from json
 if(response.ok is False):
     print("\nError {}:".format(response.status_code))
