@@ -1,11 +1,11 @@
 import requests
 #Link for api at it's base state
-base_url =https://api.exchangeratesapi.io/v1
+base_url ='https://api.exchangeratesapi.io/v1'
 #Simple prompts that asks user for the date/currencies they would like converting
 access_key = input("Please enter 'https://exchangeratesapi.io/' Access Key: ")
 date = input("Please enter a date('YYYY-MM-DD' Or 'Latest'): ")
-base = input.toupper("Convert from(Currency): ")
-currency = input.toupper("Convert to(Currency): ")
+base = input("Convert from(Currency): ").upper()
+currency = input("Convert to(Currency): ").upper()
 quantity = float(input("what is the value of {} you would like to convert: ".format(base)))
 #URL creation for the users specific parameters
 url = base_url + "/" + date + "?access_key=" + access_key + "&base=" + base + "&symbols" + currency
