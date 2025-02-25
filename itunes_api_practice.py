@@ -12,5 +12,3 @@ for song in song_release_date:
     release_year =song["releaseDate"][:4]
     if(release_year == user_date):
                 print("Track Name:{0} \nRelease Date:{1} \n".format(song["trackName"],song["releaseDate"]))
-    else:
-        print("No songs on the year given. Please enter a different date")
