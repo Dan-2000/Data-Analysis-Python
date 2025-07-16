@@ -12,8 +12,8 @@ openmeteo = openmeteo_requests.Client(session = retry_session)
 #Function to get weather data for the UK
 url = "https://api.open-meteo.com/v1/forecast"
 params = {
-	"latitude": 54.7584,
-	"longitude": -2.6953,
+	"latitude": 51.5085,
+	"longitude": -0.1257,
 	"hourly": ["temperature_2m", "precipitation"],
 	"models": "ukmo_seamless",
 	"timezone": "auto"
@@ -42,4 +42,14 @@ hourly_data["temperature_2m"] = hourly_temperature_2m
 hourly_data["precipitation"] = hourly_precipitation
 
 hourly_dataframe = pd.DataFrame(data = hourly_data)
-print(hourly_dataframe)
+print("You can search for a maximum of 7 days, how many days would you like to see?")
+user_dates=int(input())
+# Check if the user input is within the allowed range
+if user_dates <=7:
+    user_dates = user_dates * 24
+    for i in range(user_dates):
+        print(hourly_dataframe.iloc[i])
+else:
+    print("You can only search for a maximum of 7 days, please try again.")
+	
+    
