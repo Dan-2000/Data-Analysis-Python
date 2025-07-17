@@ -51,3 +51,4 @@ while True:
         break
     else:
         print("You can only search for a maximum of 7 days, please try again.")
+        user_dates=int(input())
