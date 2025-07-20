@@ -44,22 +44,23 @@ def get_user_choice_logic():
 		print("Invalid choice. Please try again.")
 		return menu()
 
-print(f"Coordinates {response.Latitude()}°N {response.Longitude()}°E")
-print(f"Elevation {response.Elevation()} m asl")
-print(f"Timezone {response.Timezone()}{response.TimezoneAbbreviation()}")
-print(f"Timezone difference to GMT+0 {response.UtcOffsetSeconds()} s")
+def main():
+	print(f"Coordinates {response.Latitude()}°N {response.Longitude()}°E")
+	print(f"Elevation {response.Elevation()} m asl")
+	print(f"Timezone {response.Timezone()}{response.TimezoneAbbreviation()}")
+	print(f"Timezone difference to GMT+0 {response.UtcOffsetSeconds()} s")
 
 # Process hourly data. The order of variables needs to be the same as requested.
-hourly = response.Hourly()
-hourly_temperature_2m = hourly.Variables(0).ValuesAsNumpy()
+	hourly = response.Hourly()
+	hourly_temperature_2m = hourly.Variables(0).ValuesAsNumpy()
 
-hourly_data = {"date": pd.date_range(
-	start = pd.to_datetime(hourly.Time(), unit = "s", utc = True),
-	end = pd.to_datetime(hourly.TimeEnd(), unit = "s", utc = True),
-	freq = pd.Timedelta(seconds = hourly.Interval()),
-	inclusive = "left"
-)}
+	hourly_data = {"date": pd.date_range(
+		start = pd.to_datetime(hourly.Time(), unit = "s", utc = True),
+		end = pd.to_datetime(hourly.TimeEnd(), unit = "s", utc = True),
+		freq = pd.Timedelta(seconds = hourly.Interval()),
+		inclusive = "left"
+	)}
 
-hourly_data["temperature_2m"] = hourly_temperature_2m
+	hourly_data["temperature_2m"] = hourly_temperature_2m
 
-hourly_dataframe = pd.DataFrame(data = hourly_data)
+	hourly_dataframe = pd.DataFrame(data = hourly_data)
