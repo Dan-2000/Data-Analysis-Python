@@ -58,14 +58,14 @@ def get_user_choice_logic():
 		elif user_choice == 2:
 			print("You selected option 2: Get weather forecast")
 			user_dates = int(input("How many days of forecast would you like to see? (max 7): "))
-		if user_dates > 7:
-			print("You can only search for a maximum of 7 days, setting to 7 days.")
-			print_weather_data(7)
-		elif user_dates <= 7:
-			print_weather_data(user_dates)
-		elif user_dates <= 0:
-			print("You have selected 0 days, we have defaulted you to 1 day.")
-			print_weather_data(1)
+			if user_dates > 7:
+				print("You can only search for a maximum of 7 days, setting to 7 days.")
+				print_weather_data(7)
+			elif user_dates <= 7:
+				print_weather_data(user_dates)
+			elif user_dates <= 0:
+				print("You have selected 0 days, we have defaulted you to 1 day.")
+				print_weather_data(1)
 		elif user_choice == 3:
 			print("Exiting the Weather App. Goodbye!")
 			exit()
