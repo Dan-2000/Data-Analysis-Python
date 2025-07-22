@@ -10,8 +10,29 @@ openmeteo = openmeteo_requests.Client(session = retry_session)
 
 url = "https://api.open-meteo.com/v1/forecast"
 
+
+def city():
+	user_city = input("Please enter your city: ")
+	# Use the Open-Meteo API to get the coordinates of the user's city
+	geocode_url = "https://geocoding-api.open-meteo.com/v1/search"
+	geocode_params = {
+		"name": user_city,
+		"latitude": 0,  # Placeholder, will be replaced by actual coordinates
+		"longitude": 0,  # Placeholder, will be replaced by actual coordinates
+		"count": 1,  # Limit to one result
+		"format": "json"
+		}
+	response = openmeteo.weather_api(geocode_url, params=geocode_params)
+	if response:
+		location = response[0]
+		return user_params(lon= location.Latitude(), lat=location.Longitude())
+	else:
+		print("City not found. Please try again.")
+		return city()
 #Function to change the URL of the Open-Meteo API to the user's city of choice
-def user_location(lon,lat):
+def user_params(lon, lat):
+	# Set the parameters for the Open-Meteo API request
+	# The parameters include latitude, longitude, hourly temperature data, model, and timezone
 	params = {
 		"latitude": lon,
 		"longitude": lat,
@@ -19,18 +40,10 @@ def user_location(lon,lat):
 		"models": "ukmo_seamless",
 		"timezone": "auto"
 	}
-def city():
-	
 
-
-
-
-
-
-responses = openmeteo.weather_api(url, params=user_location)
+responses = openmeteo.weather_api(url, params=params)
 #process the Users City weather data
 response = responses[0]
-
 hourly = response.Hourly()
 hourly_temperature_2m = hourly.Variables(0).ValuesAsNumpy()
 
@@ -83,6 +96,7 @@ def get_user_choice_logic():
 			return menu()
 
 def main():
+	city()
 	print(f"Coordinates {response.Latitude()}°N {response.Longitude()}°E")
 	print(f"Elevation {response.Elevation()} m asl")
 	print(f"Timezone {response.Timezone()}{response.TimezoneAbbreviation()}")
