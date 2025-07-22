@@ -8,17 +8,27 @@ cache_session = requests_cache.CachedSession('.cache', expire_after = 3600)
 retry_session = retry(cache_session, retries = 5, backoff_factor = 0.2)
 openmeteo = openmeteo_requests.Client(session = retry_session)
 
-#Function to get weather data for the UK
 url = "https://api.open-meteo.com/v1/forecast"
-params = {
-	"latitude": 51.5085,
-	"longitude": -0.1257,
-	"hourly": ["temperature_2m"],
-	"models": "ukmo_seamless",
-	"timezone": "auto"
-}
-responses = openmeteo.weather_api(url, params=params)
-#process the UK weather data
+
+#Function to change the URL of the Open-Meteo API to the user's city of choice
+def user_location(lon,lat):
+	params = {
+		"latitude": lon,
+		"longitude": lat,
+		"hourly": ["temperature_2m"],
+		"models": "ukmo_seamless",
+		"timezone": "auto"
+	}
+def city():
+	
+
+
+
+
+
+
+responses = openmeteo.weather_api(url, params=user_location)
+#process the Users City weather data
 response = responses[0]
 
 hourly = response.Hourly()
