@@ -1,129 +1,176 @@
-{
-    "city":"UK Default",
-    "latitude": 51.5085,
-	"longitude": -0.1257
-}
-{
-    "city": "London",
-    "latitude": 51.5074,
-    "longitude": -0.1278
-}
-{
-    "city": "Birmingham",
-    "latitude": 52.4862,
-    "longitude": -1.8904
-}
-{
-    "city": "Manchester",
-    "latitude": 53.4808,
-    "longitude": -2.2426
-}
-{
-    "city": "Glasgow",
-    "latitude": 55.8642,
-    "longitude": -4.2518
-}
-{
-    "city": "Leeds",
-    "latitude": 53.8008,
-    "longitude": -1.5491
-}
-{    "city": "Liverpool",
-    "latitude": 53.4084,
-    "longitude": -2.9916
-}
-{
-    "city": "Edinburgh",
-    "latitude": 55.9533,
-    "longitude": -3.1883
-}
-{
-    "city": "Bristol",
-    "latitude": 51.4545,
-    "longitude": -2.5879
-}
-{
-    "city": "Sheffield",
-    "latitude": 53.3811,
-    "longitude": -1.4701
-}
-{
-    "city": "Cardiff",
-    "latitude": 51.4816,
-    "longitude": -3.1791
-}
-{
-    "city": "Newcastle upon Tyne",
-    "latitude": 54.9784,
-    "longitude": -1.6174
-}
-{
-    "city": "Nottingham",
-    "latitude": 52.9548,
-    "longitude": -1.1581
-}
-{
-    "city": "Leicester",
-    "latitude": 52.6369,
-    "longitude": -1.1398
-}
-{    "city": "Coventry",
-    "latitude": 52.4084,
-    "longitude": -1.5101
-}
-{    "city": "Bradford",
-    "latitude": 53.7959,
-    "longitude": -1.7594
-}
-{    "city": "Sunderland",
-    "latitude": 54.9062,
-    "longitude": -1.3822
-}
-{    "city": "Wolverhampton",
-    "latitude": 52.5867,
-    "longitude": -2.1281
-}
-{    "city": "Plymouth",
-    "latitude": 50.3755,
-    "longitude": -4.1427
-}
-{    "city": "Derby",
-    "latitude": 52.9225,
-    "longitude": -1.4746
-}
-{    "city": "Swansea",
-    "latitude": 51.4816,
-    "longitude": -3.1791
-}
-{    "city": "Southampton",
-    "latitude": 50.9097,
-    "longitude": -1.4044
-}
-{    "city": "Portsmouth",
-    "latitude": 50.8198,
-    "longitude": -1.0880
-}
-{    "city": "Brighton",
-    "latitude": 50.8225,
-    "longitude": -0.1372
-}
-{    "city": "Exeter",
-    "latitude": 50.7216,
-    "longitude": -3.5339
-}
-{    "city": "Norwich",
-    "latitude": 52.6309,
-    "longitude": 1.2974
-}
-{    "city": "Cambridge",
-    "latitude": 52.2053,
-    "longitude": 0.1218
-}
-{    "city": "York",
-    "latitude": 53.9590,
-    "longitude": -1.0815
-}
-{    "city": "Luton",
-    "latitude": 51.8787,
-    "longitude": -0.4179
-}
+[
+    {
+        "id": 1,
+        "city": "UK Default",
+        "latitude": 51.5085,
+        "longitude": -0.1257
+    },
+    {
+        "id": 2,
+        "city": "London",
+        "latitude": 51.5074,
+        "longitude": -0.1278
+    },
+    {
+        "id": 3,
+        "city": "Birmingham",
+        "latitude": 52.4862,
+        "longitude": -1.8904
+    },
+    {
+        "id": 4,
+        "city": "Manchester",
+        "latitude": 53.4808,
+        "longitude": -2.2426
+    },
+    {
+        "id": 5,
+        "city": "Glasgow",
+        "latitude": 55.8642,
+        "longitude": -4.2518
+    },
+    {
+        "id": 6,
+        "city": "Leeds",
+        "latitude": 53.8008,
+        "longitude": -1.5491
+    },
+    {
+        "id": 7,
+        "city": "Liverpool",
+        "latitude": 53.4084,
+        "longitude": -2.9916
+    },
+    {
+        "id": 8,
+        "city": "Edinburgh",
+        "latitude": 55.9533,
+        "longitude": -3.1883
+    },
+    {
+        "id": 9,
+        "city": "Bristol",
+        "latitude": 51.4545,
+        "longitude": -2.5879
+    },
+    {
+        "id": 10,
+        "city": "Sheffield",
+        "latitude": 53.3811,
+        "longitude": -1.4701
+    },
+    {
+        "id": 11,
+        "city": "Cardiff",
+        "latitude": 51.4816,
+        "longitude": -3.1791
+    },
+    {
+        "id": 12,
+        "city": "Newcastle upon Tyne",
+        "latitude": 54.9784,
+        "longitude": -1.6174
+    },
+    {
+        "id": 13,
+        "city": "Nottingham",
+        "latitude": 52.9548,
+        "longitude": -1.1581
+    },
+    {
+        "id": 14,
+        "city": "Leicester",
+        "latitude": 52.6369,
+        "longitude": -1.1398
+    },
+    {
+        "id": 15,
+        "city": "Coventry",
+        "latitude": 52.4084,
+        "longitude": -1.5101
+    },
+    {
+        "id": 16,
+        "city": "Bradford",
+        "latitude": 53.7959,
+        "longitude": -1.7594
+    },
+    {
+        "id": 17,
+        "city": "Sunderland",
+        "latitude": 54.9062,
+        "longitude": -1.3822
+    },
+    {
+        "id": 18,
+        "city": "Wolverhampton",
+        "latitude": 52.5867,
+        "longitude": -2.1281
+    },
+    {
+        "id": 19,
+        "city": "Plymouth",
+        "latitude": 50.3755,
+        "longitude": -4.1427
+    },
+    {
+        "id": 20,
+        "city": "Derby",
+        "latitude": 52.9225,
+        "longitude": -1.4746
+    },
+    {
+        "id": 21,
+        "city": "Swansea",
+        "latitude": 51.4816,
+        "longitude": -3.1791
+    },
+    {
+        "id": 22,
+        "city": "Southampton",
+        "latitude": 50.9097,
+        "longitude": -1.4044
+    },
+    {
+        "id": 23,
+        "city": "Portsmouth",
+        "latitude": 50.8198,
+        "longitude": -1.0880
+    },
+    {
+        "id": 24,
+        "city": "Brighton",
+        "latitude": 50.8225,
+        "longitude": -0.1372
+    },
+    {
+        "id": 25,
+        "city": "Exeter",
+        "latitude": 50.7216,
+        "longitude": -3.5339
+    },
+    {
+        "id": 26,
+        "city": "Norwich",
+        "latitude": 52.6309,
+        "longitude": 1.2974
+    },
+    {
+        "id": 27,
+        "city": "Cambridge",
+        "latitude": 52.2053,
+        "longitude": 0.1218
+    },
+    {
+        "id": 28,
+        "city": "York",
+        "latitude": 53.9590,
+        "longitude": -1.0815
+    },
+    {
+        "id": 29,
+        "city": "Luton",
+        "latitude": 51.8787,
+        "longitude": -0.4179
+    }
+]
