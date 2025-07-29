@@ -13,52 +13,53 @@ url = "https://api.open-meteo.com/v1/forecast"
 
 def city():
 	user_city = input("Please enter your city: ")
-	# Use the Open-Meteo API to get the coordinates of the user's city
+	# Use the Open-Meteo Geocoding API to get the coordinates of the user's city
 	geocode_url = "https://geocoding-api.open-meteo.com/v1/search"
 	geocode_params = {
 		"name": user_city,
-		"latitude": 0,  # Placeholder, will be replaced by actual coordinates
-		"longitude": 0,  # Placeholder, will be replaced by actual coordinates
 		"count": 1,  # Limit to one result
 		"format": "json"
-		}
-	response = openmeteo.weather_api(geocode_url, params=geocode_params)
-	if response:
-		location = response[0]
-		return user_params(lon= location.Latitude(), lat=location.Longitude())
+	}
+	geocode_response = retry_session.get(geocode_url, params=geocode_params)
+	geocode_data = geocode_response.json()
+	if "results" in geocode_data and len(geocode_data["results"]) > 0:
+		location = geocode_data["results"][0]
+		lat = location["latitude"]
+		lon = location["longitude"]
+		return user_params(lat=lat, lon=lon)
+	# If the city is not found, prompt the user to try again
 	else:
 		print("City not found. Please try again.")
 		return city()
-#Function to change the URL of the Open-Meteo API to the user's city of choice
-def user_params(lon, lat):
+
+# Function to change the URL of the Open-Meteo API to the user's city of choice
+def user_params(lat, lon):
 	# Set the parameters for the Open-Meteo API request
-	# The parameters include latitude, longitude, hourly temperature data, model, and timezone
 	params = {
-		"latitude": lon,
-		"longitude": lat,
+		"latitude": lat,
+		"longitude": lon,
 		"hourly": ["temperature_2m"],
 		"models": "ukmo_seamless",
 		"timezone": "auto"
 	}
+	global response, hourly_temperature_2m, hourly_data
+	responses = openmeteo.weather_api(url, params=params)
+	# Process the user's city weather data
+	response = responses[0]
+	hourly = response.Hourly()
+	hourly_temperature_2m = hourly.Variables(0).ValuesAsNumpy()
+	hourly_data = {"date": pd.date_range(
+		start=pd.to_datetime(hourly.Time(), unit="s", utc=True),
+		end=pd.to_datetime(hourly.TimeEnd(), unit="s", utc=True),
+		freq=pd.Timedelta(seconds=hourly.Interval()),
+		inclusive="left"
+	)}
 
-responses = openmeteo.weather_api(url, params=params)
-#process the Users City weather data
-response = responses[0]
-hourly = response.Hourly()
-hourly_temperature_2m = hourly.Variables(0).ValuesAsNumpy()
-
-hourly_data = {"date": pd.date_range(
-	start = pd.to_datetime(hourly.Time(), unit = "s", utc = True),
-	end = pd.to_datetime(hourly.TimeEnd(), unit = "s", utc = True),
-	freq = pd.Timedelta(seconds = hourly.Interval()),
-	inclusive = "left"
-)}
-
-hourly_data["temperature_2m"] = hourly_temperature_2m
-
-hourly_dataframe = pd.DataFrame(data = hourly_data)
+	hourly_data["temperature_2m"] = hourly_temperature_2m
+	hourly_dataframe = pd.DataFrame(data = hourly_data)
 
 def menu():
+	city()
 	print("Welcome to the Weather App! Please select an option: \n1. Get current weather \n2. Get weather forecast \n3. Exit")
 	get_user_choice_logic()
 
