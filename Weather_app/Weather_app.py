@@ -10,7 +10,6 @@ openmeteo = openmeteo_requests.Client(session = retry_session)
 
 url = "https://api.open-meteo.com/v1/forecast"
 
-
 def city():
 	user_city = input("Please enter your city: ")
 	# Use the Open-Meteo Geocoding API to get the coordinates of the user's city
@@ -42,7 +41,7 @@ def user_params(lat, lon):
 		"models": "ukmo_seamless",
 		"timezone": "auto"
 	}
-	global response, hourly_temperature_2m, hourly_data
+	global response, hourly_temperature_2m, hourly_data,hourly_dataframe
 	responses = openmeteo.weather_api(url, params=params)
 	# Process the user's city weather data
 	response = responses[0]
@@ -60,6 +59,10 @@ def user_params(lat, lon):
 
 def menu():
 	city()
+	print(f"Coordinates {response.Latitude()}°N {response.Longitude()}°E")
+	print(f"Elevation {response.Elevation()} m asl")
+	print(f"Timezone {response.Timezone()}{response.TimezoneAbbreviation()}")
+	print(f"Timezone difference to GMT+0 {response.UtcOffsetSeconds()} s")
 	print("Welcome to the Weather App! Please select an option: \n1. Get current weather \n2. Get weather forecast \n3. Exit")
 	get_user_choice_logic()
 
@@ -97,10 +100,6 @@ def get_user_choice_logic():
 			return menu()
 
 def main():
-	city()
-	print(f"Coordinates {response.Latitude()}°N {response.Longitude()}°E")
-	print(f"Elevation {response.Elevation()} m asl")
-	print(f"Timezone {response.Timezone()}{response.TimezoneAbbreviation()}")
-	print(f"Timezone difference to GMT+0 {response.UtcOffsetSeconds()} s")
 	menu()
+	
 main()
