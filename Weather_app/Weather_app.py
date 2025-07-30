@@ -58,12 +58,7 @@ def user_params(lat, lon):
 	hourly_dataframe = pd.DataFrame(data = hourly_data)
 
 def menu():
-	city()
-	print(f"Coordinates {response.Latitude()}°N {response.Longitude()}°E")
-	print(f"Elevation {response.Elevation()} m asl")
-	print(f"Timezone {response.Timezone()}{response.TimezoneAbbreviation()}")
-	print(f"Timezone difference to GMT+0 {response.UtcOffsetSeconds()} s")
-	print("Welcome to the Weather App! Please select an option: \n1. Get current weather \n2. Get weather forecast \n3. Exit")
+	print("Welcome to the Weather App! Please select an option: \n1. Get current weather \n2. Get weather forecast \n3. Select a different City \n4.Exit")
 	get_user_choice_logic()
 
 # Function to print weather data and convert user input to hours
@@ -92,6 +87,10 @@ def get_user_choice_logic():
 				print("You have selected 0 days, we have defaulted you to 1 day.")
 				print_weather_data(1)
 		elif user_choice == 3:
+			print("Please enter a different city")
+			city()
+			return menu()
+		elif user_choice == 4:
 			print("Exiting the Weather App. Goodbye!")
 			exit()
 			break
@@ -100,6 +99,11 @@ def get_user_choice_logic():
 			return menu()
 
 def main():
+	city()
+	print(f"Coordinates {response.Latitude()}°N {response.Longitude()}°E")
+	print(f"Elevation {response.Elevation()} m asl")
+	print(f"Timezone {response.Timezone()}{response.TimezoneAbbreviation()}")
+	print(f"Timezone difference to GMT+0 {response.UtcOffsetSeconds()} s")
 	menu()
 	
 main()
