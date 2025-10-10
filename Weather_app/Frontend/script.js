@@ -1,20 +1,18 @@
-  async function getWeather() {
-      const city = document.getElementById("city").value.trim();
-      if (!city) return alert("Please enter a city");
+async function getWeather() {
+  const city = document.getElementById("city").value;
+  const days = document.getElementById("days").value || 1;
+  const response = await fetch(`/api/weather?city=${city}&days=${days}`);
+  const data = await response.json();
 
-      const res = await fetch(`/api/weather?city=${city}`);
-      const data = await res.json();
-      const out = document.getElementById("output");
+  if (data.error) {
+    document.getElementById("output").innerText = data.error;
+    return;
+  }
 
-      if (data.error) {
-        out.innerHTML = `<p style="color:red;">${data.error}</p>`;
-        return;
-      }
-
-      let html = `<h3>Weather for ${data.city}</h3><ul>`;
-      for (let i = 0; i < 10; i++) {
-        html += `<li>${data.time[i]} → ${data.temperature_2m[i].toFixed(1)}°C</li>`;
-      }
-      html += "</ul>";
-      out.innerHTML = html;
-    }
+  let html = `<h2>${data.city}</h2><ul>`;
+  for (let f of data.forecast.slice(0, 10)) {
+    html += `<li>${f.date} → ${f.temperature.toFixed(1)}°C</li>`;
+  }
+  html += "</ul>";
+  document.getElementById("output").innerHTML = html;
+}
