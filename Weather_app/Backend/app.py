@@ -13,19 +13,23 @@ url = "https://api.open-meteo.com/v1/forecast"
 
 app = Flask(__name__)
 
-# --- Function to get city coordinates ---
-def get_city_coords(city_name):
+# Function to get city coordinates
+def get_city_coords(city):
     geocode_url = "https://geocoding-api.open-meteo.com/v1/search"
-    params = {"name": city_name, "count": 1, "format": "json"}
+    params = {
+        "name": city,
+        "count": 1,
+        "format": "json"
+    }
     response = retry_session.get(geocode_url, params=params)
     data = response.json()
-
     if "results" in data and len(data["results"]) > 0:
         loc = data["results"][0]
         return loc["latitude"], loc["longitude"]
-    return None, None
+    else:
+        return None, None
 
-# --- Function to fetch weather data (from your user_params) ---
+# Function to fetch weather data from user_params
 def get_weather_data(lat, lon):
     params = {
         "latitude": lat,
@@ -54,13 +58,15 @@ def get_weather_data(lat, lon):
     return df, response
 
 
-# --- Flask API route ---
-@app.route("/api/weather")
-def home():
-    return(render_template("index.html"))
 
-def weather_api():
-    # Get parameters from the URL: /api/weather?city=London&days=3
+# --- Flask API routes ---
+@app.route("/")
+def home():
+    return render_template("index.html")
+
+@app.route("/api/weather", methods=["GET"])
+def get_weather():
+    # Get parameters from the URL
     city = request.args.get("city")
     days = int(request.args.get("days", 1))  # default = 1 day
 
@@ -77,14 +83,19 @@ def weather_api():
     hours = days * 24
     df = df.head(hours)
 
-    # Convert to JSON
+    # Convert to JSON, ensuring all fields are serializable
+    def decode_if_bytes(val):
+        if isinstance(val, bytes):
+            return val.decode('utf-8')
+        return val
+
     result = {
         "city": city,
         "coordinates": {"lat": lat, "lon": lon},
-        "elevation": response.Elevation(),
-        "timezone": response.Timezone(),
-        "timezone_abbr": response.TimezoneAbbreviation(),
-        "utc_offset": response.UtcOffsetSeconds(),
+        "elevation": decode_if_bytes(response.Elevation()),
+        "timezone": decode_if_bytes(response.Timezone()),
+        "timezone_abbr": decode_if_bytes(response.TimezoneAbbreviation()),
+        "utc_offset": decode_if_bytes(response.UtcOffsetSeconds()),
         "forecast": [
             {"date": str(df["date"][i]), "temperature": float(df["temperature_2m"][i])}
             for i in range(len(df))
