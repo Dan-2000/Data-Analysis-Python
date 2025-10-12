@@ -1,0 +1,40 @@
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(120deg, hsl(48, 98%, 48%), #ef9c01);
+  text-align: center;
+  padding: 40px;
+}
+
+.container {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  display: inline-block;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+input, button {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+pre {
+  text-align: left;
+  background: #f6f6f6;
+  padding: 15px;
+  border-radius: 8px;
+  overflow-x: auto;
+}
