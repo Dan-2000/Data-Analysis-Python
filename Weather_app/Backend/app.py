@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify,render_template
 import openmeteo_requests
 import pandas as pd
 import requests_cache
@@ -58,6 +58,9 @@ def get_weather_data(lat, lon):
 
 # --- Flask API route ---
 @app.route("/api/weather")
+def home():
+    return(render_template("index.html"))
+
 def weather_api():
     # Get parameters from the URL: /api/weather?city=London&days=3
     city = request.args.get("city")
