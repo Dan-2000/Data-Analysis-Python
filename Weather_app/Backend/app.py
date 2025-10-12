@@ -16,16 +16,14 @@ app = Flask(__name__)
 # --- Function to get city coordinates ---
 def get_city_coords(city_name):
     geocode_url = "https://geocoding-api.open-meteo.com/v1/search"
-    geocode_params = {"name": city_name, "count": 1, "format": "json"}
-    geocode_response = retry_session.get(geocode_url, params=geocode_params)
-    geocode_data = geocode_response.json()
+    params = {"name": city_name, "count": 1, "format": "json"}
+    response = retry_session.get(geocode_url, params=params)
+    data = response.json()
 
-    if "results" in geocode_data and len(geocode_data["results"]) > 0:
-        location = geocode_data["results"][0]
-        return location["latitude"], location["longitude"]
-    else:
-        return None, None
-
+    if "results" in data and len(data["results"]) > 0:
+        loc = data["results"][0]
+        return loc["latitude"], loc["longitude"]
+    return None, None
 
 # --- Function to fetch weather data (from your user_params) ---
 def get_weather_data(lat, lon):
