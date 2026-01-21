@@ -13,7 +13,14 @@
     <input type="number" id="daysInput" placeholder="Days" min="1" max="7" />
     <button id="getWeatherBtn">Get Weather</button>
 
-    <pre id="output"></pre>
+    <div id="message" style="color: red; margin: 10px;"></div>
+
+    <div id="carousel" class="carousel" style="display: none;">
+      <div class="slides"></div>
+      <div class="indicators"></div>
+      <button class="prev">←</button>
+      <button class="next">→</button>
+    </div>
   </div>
 
   <script src="{{ url_for('static', filename='script.js') }}"></script>
