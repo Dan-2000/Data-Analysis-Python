@@ -1,0 +1,6 @@
+flask
+gunicorn
+openmeteo-requests
+pandas
+requests-cache
+retry-requests
